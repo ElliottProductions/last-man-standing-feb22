@@ -138,9 +138,10 @@ section.main-section{
 
 }
 div.game-div {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid black;
+    width: 750px;
+    height: 550px;
+    border: solid 1px black;
+    display: grid;
+    grid-template-rows: 19fr 1fr;
+    position: relative;
 }
