@@ -30,6 +30,12 @@ main {
     margin-bottom: calc(var(--footer-height));
 }
 
+.main2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 section {
     background-color: var(--color5);
     width: 1000px;
@@ -75,6 +81,13 @@ h2 {
     color:aliceblue;
 }
 
+.far-right {
+    width: 550px;
+    margin: 50px;
+    height: 500px;
+    background-image: url('../assets/lastmangraphic.PNG');
+    position: relative;
+}
 .main-logo {
     animation: pulse 5s infinite ease-in-out;
 }
@@ -126,9 +139,10 @@ footer {
 
 .auth-main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     color:aliceblue;
+    margin: 150px;
 }
 
 .auth-container {
