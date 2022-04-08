@@ -19,7 +19,7 @@ body {
     --footer-height: 25px;
     
     font-family: 'Titillium Web', sans-serif;
-    background-color: var(--color2);
+    background-color:black;
 }
 
 main {
@@ -46,11 +46,10 @@ section {
 }
 
 header {
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--color3);
-    height: var(--header-height);
-    box-shadow: var(--shadow);
+
+ 
+    height: 100px
+
 }
 
 h2 {
@@ -58,8 +57,22 @@ h2 {
     font-weight: bold;
 }
 
-.gutter-right {
-    margin-right: 20px;
+
+.title {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 10ch;
+    background-image: linear-gradient(red, yellow);
+}
+
+.far-left {
+    width: 300px;
+    margin: 50px;
+    background-color: rgb(247, 9, 9);
+    text-align: center;
+    color:aliceblue;
 }
 
 .main-logo {
@@ -115,6 +128,7 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    color:aliceblue;
 }
 
 .auth-container {
