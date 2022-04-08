@@ -129,3 +129,36 @@ footer {
 .auth-container button {
     margin: 10px;
 }
+
+#game-stats{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#game-over{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.right {
+    justify-content: center;
+    align-items: center;
+}
+
+.player-cards{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.player-card{
+    border: double 5px rgb(62, 62, 62);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin: 10px;
+    padding: 10px;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/home.css">
+    <title>Game Over</title>
+</head>
+
+<body>
+    <header>
+        <h3 id="gameover-header">
+            Game Over
+        </h3>
+    </header>
+    <main id="game-over">
+        <div id="game-stats">
+            <div class="left">
+                <div class="player-cards">
+                    <div class="player-card">
+                        <div id="playername">
+                            Jones
+                        </div>
+                        <div>
+                            survived <span id="survivedrecord">8 seconds</span>
+                        </div>
+                        <div>
+                            infected <span id="infectedrecord">2 players</span>
+                        </div>
+                    </div>
+                    <div class="player-card">
+                        <div id="playername">
+                            Bill
+                        </div>
+                        <div>
+                            survived <span id="survivedrecord">0 seconds</span>
+                        </div>
+                        <div>
+                            infected <span id="infectedrecord">1 player</span>
+                        </div>
+                    </div>
+                    <div class="player-card">
+                        <div id="playername"> Egg </div>
+                        <div>
+                            survived <span id="survivedrecord">420 seconds</span>
+                        </div>
+                        <div>
+                            infected <span id="infectedrecord">0 players</span>
+                        </div>
+                    </div>
+                    <div class="player-card">
+                        <div id="playername"> Margaret Thatcher </div>
+                        <div>
+                            survived <span id="survivedrecord">69 seconds</span>
+                        </div>
+                        <div>
+                            infected <span id="infectedrecord">0 players</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="gameover-picture">
+                    <img src="./assets/alchemy-logo.png">
+                </div>
+            </div>
+        </div>
+        <div>
+            <button id="to-lobbies">Back to Lobbies</button>
+        </div>
+    </main>
+    <footer>
+        <div class="copy gutter-right">&copy; 2022 Last Team Standing</div>
+    </footer>
+    <script type="module" src="./gameover.js"></script>
+</body>
+
+</html>
