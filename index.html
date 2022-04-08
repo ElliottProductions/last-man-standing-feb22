@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/home.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="gutter-right logo">
+            <img src="assets/big-logo.png" />
+        </div>
+    </header>
+    <main class="auth-main">
+        <div class="left">
+            <div class="auth-container">
+                <form id="sign-in">
+                    <h3>Sign In</h3>
+                    <label>Email </label><input type="email" name="email" id="sign-in-email"/>
+                    <label>Password </label><input type="password" name="password" id="sign-in-password"/>
+                    <button>Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="right">
+            <div class="auth-container">
+                <form id='sign-up'>
+                    <h3>Sign Up</h3>
+                    <label>Email </label><input type='email' name='email' id="sign-up-email" />
+                    <label>Password </label><input type='password' name='password' id="sign-up-password" />
+                    <button>Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="copy gutter-right">&copy; 2021 Alchemy Code Lab</div>
+    </footer>
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>
