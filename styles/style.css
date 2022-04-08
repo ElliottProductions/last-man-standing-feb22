@@ -23,7 +23,7 @@ body {
 }
 
 main {
-    display: flex;
+    display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -128,4 +128,19 @@ footer {
 
 .auth-container button {
     margin: 10px;
+}
+
+section.main-section{    
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+div.game-div {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
 }
