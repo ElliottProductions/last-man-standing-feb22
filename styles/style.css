@@ -129,3 +129,39 @@ footer {
 .auth-container button {
     margin: 10px;
 }
+
+.left {
+    display: inline;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 400px;
+    border-style: solid;
+    border-color: black;
+    position: absolute;
+    left: 0px;
+    width: 300px;
+    padding: 10px;
+    top: 165px;
+}
+
+.fighter-selection {
+    flex-direction: column;
+}
+
+.right {
+    display: inline;
+    flex-direction: column;
+    flex-wrap: wrap;
+    float: right;
+    border-style: solid;
+    border-color: black;
+    width: 400px;
+    min-width: 30%;
+    height: 700px;
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    padding: 10px;
+    bottom: 30px;
+}
+
