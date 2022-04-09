@@ -130,7 +130,40 @@ footer {
     margin: 10px;
 }
 
-.left {
+#game-stats{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#game-over{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.right {
+    justify-content: center;
+    align-items: center;
+}
+
+.player-cards{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.player-card{
+    border: double 5px rgb(62, 62, 62);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin: 10px;
+    padding: 10px;
+}
+
+.lobby-left {
     display: inline;
     flex-direction: column;
     flex-wrap: wrap;
@@ -148,7 +181,7 @@ footer {
     flex-direction: column;
 }
 
-.right {
+.lobby-right {
     display: inline;
     flex-direction: column;
     flex-wrap: wrap;
@@ -164,4 +197,3 @@ footer {
     padding: 10px;
     bottom: 30px;
 }
-
