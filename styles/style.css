@@ -19,7 +19,7 @@ body {
     --footer-height: 25px;
     
     font-family: 'Titillium Web', sans-serif;
-    background-color: var(--color2);
+    background-color:black;
 }
 
 main {
@@ -28,6 +28,12 @@ main {
     justify-content: center;
     align-items: center;
     margin-bottom: calc(var(--footer-height));
+}
+
+.main2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 section {
@@ -46,11 +52,10 @@ section {
 }
 
 header {
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--color3);
-    height: var(--header-height);
-    box-shadow: var(--shadow);
+
+ 
+    height: 100px
+
 }
 
 h2 {
@@ -58,10 +63,31 @@ h2 {
     font-weight: bold;
 }
 
-.gutter-right {
-    margin-right: 20px;
+
+.title {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 10ch;
+    background-image: linear-gradient(red, yellow);
 }
 
+.far-left {
+    width: 300px;
+    margin: 50px;
+    background-color: rgb(247, 9, 9);
+    text-align: center;
+    color:aliceblue;
+}
+
+.far-right {
+    width: 550px;
+    margin: 50px;
+    height: 500px;
+    background-image: url('../assets/lastmangraphic.PNG');
+    position: relative;
+}
 .main-logo {
     animation: pulse 5s infinite ease-in-out;
 }
@@ -113,8 +139,10 @@ footer {
 
 .auth-main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    color:aliceblue;
+    margin: 150px;
 }
 
 .auth-container {
@@ -144,4 +172,37 @@ div.game-div {
     display: grid;
     grid-template-rows: 19fr 1fr;
     position: relative;
+}
+
+#game-stats{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#game-over{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.right {
+    justify-content: center;
+    align-items: center;
+}
+
+.player-cards{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.player-card{
+    border: double 5px rgb(62, 62, 62);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin: 10px;
+    padding: 10px;
 }
