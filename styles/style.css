@@ -19,7 +19,7 @@ body {
     --footer-height: 25px;
     
     font-family: 'Titillium Web', sans-serif;
-    background-color:black;
+    background-color:rgb(255, 255, 255);
 }
 
 main {
