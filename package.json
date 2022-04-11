@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "esbuild": "^0.14.34",
-    "kaboom": "^2000.2.9"
-  }
-}
