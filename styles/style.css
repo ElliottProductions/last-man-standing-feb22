@@ -241,3 +241,18 @@ div.game-div {
     padding: 10px;
     bottom: 30px;
 }
+
+.game-div{
+    width: 700px;
+    height: 490px;
+    border: dotted 1px black;
+    display: grid;
+    grid-template-rows: 19fr 1fr;
+    position: relative;
+
+}
+
+.player {
+    width: 10px;
+    height: 10px;
+}

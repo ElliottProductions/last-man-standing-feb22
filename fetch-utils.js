@@ -22,8 +22,7 @@ export async function getMyProfile() {
         .select('*')
         .match({ email: user.email })
         .single();
-    console.log(response);
-    return checkError(response);
+    return (response.data);
 }
 
 export function getUser() {
@@ -44,8 +43,6 @@ export function redirectIfLoggedIn() {
 
 export async function signupUser(email, password) {
     const response = await client.auth.signUp({ email, password });
-    
-    
 
     return response.user;
 }
@@ -64,9 +61,9 @@ export async function logout() {
 
 export async function updatePlayer(updatedPlayer){
     const response = await client
-        .from('')
-        .update('')
-        .match('')
+        .from('profiles')
+        .update(updatedPlayer)
+        .match({ user_id: updatedPlayer.user_id })
         .single();
 
     return checkError (response);
@@ -76,7 +73,6 @@ export async function getActivePlayers() {
     const response = await client
         .from('profiles')
         .select('*');
-
 
     return checkError(response);
 }
