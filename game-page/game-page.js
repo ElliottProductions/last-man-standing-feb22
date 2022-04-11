@@ -81,5 +81,5 @@ window.addEventListener('keydown', async (e) => {
     }
 
     await updatePlayer(currentPlayer);
-    fetchAndDisplayActivePlayers();
+    await fetchAndDisplayActivePlayers();
 });
