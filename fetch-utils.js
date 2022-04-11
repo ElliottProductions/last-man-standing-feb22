@@ -37,6 +37,24 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-// function checkError({ data, error }) {
-//     return error ? console.error(error) : data;
-// }
+export async function updatePlayer(updatedPlayer){
+    const response = await client
+        .from('')
+        .update('')
+        .match('')
+        .single();
+
+    return checkError (response);
+}
+
+export async function getActivePlayers() {
+    const response = await client
+        .from('')
+        .select('*')
+        .match();
+
+    return checkError(response);
+}
+function checkError({ data, error }) {
+    return error ? console.error(error) : data;
+}
