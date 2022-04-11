@@ -22,7 +22,7 @@ export async function getMyProfile() {
         .select('*')
         .match({ email: user.email })
         .single();
-
+    console.log(response);
     return checkError(response);
 }
 
@@ -44,6 +44,8 @@ export function redirectIfLoggedIn() {
 
 export async function signupUser(email, password) {
     const response = await client.auth.signUp({ email, password });
+    
+    
 
     return response.user;
 }
@@ -72,7 +74,7 @@ export async function updatePlayer(updatedPlayer){
 
 export async function getActivePlayers() {
     const response = await client
-        .from('users')
+        .from('profiles')
         .select('*');
 
 

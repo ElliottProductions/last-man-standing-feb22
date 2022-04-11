@@ -16,7 +16,7 @@ signUpForm.addEventListener('submit', async (event) => {
     const user = await signupUser(signUpEmail.value, signUpPassword.value);
 
     if (user) {
-        createUser();
+        await createUser();
         redirectIfLoggedIn();
     } else {
         console.error(user);
@@ -28,6 +28,7 @@ signInForm.addEventListener('submit', async (event) => {
     const user = await signInUser(signInEmail.value, signInPassword.value);
 
     if (user) {
+        
         redirectIfLoggedIn();
     } else {
         console.error(user);
