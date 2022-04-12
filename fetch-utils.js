@@ -5,11 +5,20 @@ export const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
 export async function infect(player){
-    const response = await client
+    await client
         .from('profiles')
         .update({ infected: true })
         .match({ user_id: player.user_id })
         .single();
+}
+
+export async function getInfectedPlayers() {
+    const response = await client
+        .from('profiles')
+        .select('*')
+        .match({ infected: true });
+    
+    return checkError(response);
 }
 
 export async function createUser(){
@@ -85,4 +94,9 @@ export async function getActivePlayers() {
 }
 function checkError({ data, error }) {
     return error ? console.error(error) : data;
+}
+
+export async function endGameState() {
+    window.location.replace('../gameover');
+    alert('gameover');
 }
