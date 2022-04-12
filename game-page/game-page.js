@@ -24,7 +24,7 @@ window.addEventListener('load', async () => {
         .from('profiles')
         // if a row is added, let me know and tell about that row
         .on('UPDATE', (payload) => {
-            //fetchAndDisplayActivePlayers();
+            fetchAndDisplayActivePlayers();
             console.log(payload);
         })
         .subscribe();
