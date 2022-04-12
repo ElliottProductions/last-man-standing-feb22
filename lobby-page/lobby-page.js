@@ -1,4 +1,4 @@
-import { checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
+import { checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile, getInfectedPlayers } from '../fetch-utils.js';
 
 checkAuth();
 
@@ -18,15 +18,25 @@ window.addEventListener('load', async () => {
 readyBtn.addEventListener('click', async () => {
     const user = getUser();
     const profile = await getMyProfile();
-    const userArr = await getActivePlayers();
+    
     if (profile.is_ready === false) {
         await readyUp(user);
+        const userArr = await getActivePlayers();
         for (let player of userArr) {
             if (player.is_ready === false) {
+                console.log(`this player broke it`, player);
                 break;
             }
-            startGame();
+            
+            
+            
         }
+        
+        await startGame();
+        
+        
+        
+        
     } else {
         await unReady(user);
     }
