@@ -1,4 +1,4 @@
-import { checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect } from '../fetch-utils.js';
+import { checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState } from '../fetch-utils.js';
 
 
 checkAuth();
@@ -25,7 +25,7 @@ window.addEventListener('load', async () => {
         // if a row is added, let me know and tell about that row
         .on('UPDATE', (payload) => {
             fetchAndDisplayActivePlayers();
-            console.log(payload);
+            //console.log(payload);
         })
         .subscribe();
 });
@@ -40,7 +40,7 @@ async function fetchAndDisplayActivePlayers() {
         const playerEl = document.createElement('div');
         playerEl.textContent = `😋 ${player.email}`;
         playerEl.classList.add('player');
-        console.log(`${player.email} is at x: ${player.x_position}, y: ${player.y_position}`);
+        //console.log(`${player.email} is at x: ${player.x_position}, y: ${player.y_position}`);
         playerEl.style.transform = `translate(${player.x_position}px, ${player.y_position}px)`;
 
         gameArea.append(playerEl);
@@ -88,23 +88,31 @@ window.addEventListener('keydown', async (e) => {
 async function getCollision(){
 
     const activePlayerArr = await getActivePlayers();
+    const infectedPlayer = await getInfectedPlayers();
 
+    // for (let player of infectedPlayer) {
+    if (activePlayerArr.length - 1 === infectedPlayer.length) {
+        await endGameState();
+    }
+        
     for (let player of activePlayerArr) {
-        //check and see if any of the active players are colliding with "id"
+        console.log(player);
+                //check and see if any of the active players are colliding with "id"
         if ( 
             ((currentPlayer.y_position + 10) < (player.y_position)) ||
-            (currentPlayer.y_position > (player.y_position + 10)) ||
-            ((currentPlayer.x_position + 10) < player.x_position) ||
-            (currentPlayer.x_position > (player.x_position + 10))
-            
+                    (currentPlayer.y_position > (player.y_position + 10)) ||
+                    ((currentPlayer.x_position + 10) < player.x_position) ||
+                    (currentPlayer.x_position > (player.x_position + 10))
+                    
         ){
-            //
+                    //
         } else if (currentPlayer.user_id !== player.user_id) {
-            if (currentPlayer.infected) {
+            if (currentPlayer.infected && player.infected !== true) {
                 infect(player);
+                // alert('infected');
             }
-            
-            //nothing
+                    
+                    //nothing
         }
 
     }
