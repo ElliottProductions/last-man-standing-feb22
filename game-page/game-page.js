@@ -1,4 +1,4 @@
-import { checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client } from '../fetch-utils.js';
+import { checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect } from '../fetch-utils.js';
 
 
 checkAuth();
@@ -79,7 +79,34 @@ window.addEventListener('keydown', async (e) => {
             currentPlayer.x_position = GAME_WIDTH;
         }
     }
-
+  
     await updatePlayer(currentPlayer);
-    fetchAndDisplayActivePlayers();
+    await fetchAndDisplayActivePlayers();
+    await getCollision();
 });
+
+async function getCollision(){
+
+    const activePlayerArr = await getActivePlayers();
+
+    for (let player of activePlayerArr) {
+        //check and see if any of the active players are colliding with "id"
+        if ( 
+            ((currentPlayer.y_position + 10) < (player.y_position)) ||
+            (currentPlayer.y_position > (player.y_position + 10)) ||
+            ((currentPlayer.x_position + 10) < player.x_position) ||
+            (currentPlayer.x_position > (player.x_position + 10))
+            
+        ){
+            //
+        } else if (currentPlayer.user_id !== player.user_id) {
+            if (currentPlayer.infected) {
+                infect(player);
+            }
+            
+            //nothing
+        }
+
+    }
+
+}
