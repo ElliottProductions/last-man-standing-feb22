@@ -4,6 +4,13 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 export const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
+export async function infect(player){
+    const response = await client
+        .from('profiles')
+        .update({ infected: true })
+        .match({ user_id: player.user_id })
+        .single();
+}
 
 export async function createUser(){
     const response = await client
