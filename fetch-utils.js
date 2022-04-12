@@ -94,11 +94,14 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-export async function updatePlayer(updatedPlayer){
+export async function updatePlayer(player, playerY, playerX){
     const response = await client
         .from('profiles')
-        .update(updatedPlayer)
-        .match({ user_id: updatedPlayer.user_id })
+        .update({ 
+            y_position: playerY, 
+            x_position: playerX, 
+        })
+        .match({ user_id: player.user_id })
         .single();
 
     return checkError (response);

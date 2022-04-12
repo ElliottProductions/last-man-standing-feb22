@@ -18,13 +18,13 @@ let currentPlayer;
 
 window.addEventListener('load', async () => {
     currentPlayer = await getMyProfile();
-    fetchAndDisplayActivePlayers();
+    await fetchAndDisplayActivePlayers();
     await client
     // hey, listen to the chats room
         .from('profiles')
         // if a row is added, let me know and tell about that row
-        .on('UPDATE', (payload) => {
-            fetchAndDisplayActivePlayers();
+        .on('UPDATE', async (payload) => {
+            await fetchAndDisplayActivePlayers();
             payload;
         })
         .subscribe();
@@ -90,7 +90,7 @@ window.addEventListener('keydown', async (e) => {
             currentPlayer.x_position = GAME_WIDTH;
         }
     }
-    await updatePlayer(currentPlayer);
+    await updatePlayer(currentPlayer, currentPlayer.y_position, currentPlayer.x_position);
     await fetchAndDisplayActivePlayers();
     await getCollision();
 });
@@ -116,7 +116,9 @@ async function getCollision(){
         ){
                     //
         } else if (currentPlayer.user_id !== player.user_id) {
+            console.log('player is colliding');
             if ((currentPlayer.infected === true) && (player.infected !== true)) {
+                console.log('player is infecting');
                 infect(player);
             }
                     //nothing
