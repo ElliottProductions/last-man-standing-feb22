@@ -5,6 +5,7 @@ export const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
 export async function infect(player){
+    console.log(player);
     await client
         .from('profiles')
         .update({ infected: true })
@@ -17,6 +18,15 @@ export async function getInfectedPlayers() {
         .from('profiles')
         .select('*')
         .match({ infected: true });
+    
+    return checkError(response);
+}
+
+export async function getReadyPlayers() {
+    const response = await client
+        .from('profiles')
+        .select('*')
+        .match({ is_ready: true });
     
     return checkError(response);
 }
@@ -127,7 +137,14 @@ export async function unReady(user) {
 
 export async function startGame(){
     window.location.replace('../game-page');
-    const userArr = await getActivePlayers();
-    const random = Math.ceiling((Math.random) * userArr.length);
+    alert('start game function is now running');
+    
+
+    
+
+    
+    
+
+
     
 }

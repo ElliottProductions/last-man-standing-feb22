@@ -1,4 +1,4 @@
-import { checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState } from '../fetch-utils.js';
+import { getReadyPlayers, checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState } from '../fetch-utils.js';
 
 
 checkAuth();
@@ -28,6 +28,17 @@ window.addEventListener('load', async () => {
             //console.log(payload);
         })
         .subscribe();
+    const infectedArr = await getInfectedPlayers();
+    if (infectedArr.length < 1){
+        const userArr = await getReadyPlayers();
+        const random = Math.floor((Math.random()) * (userArr.length - 1));
+        const chosen = userArr[random];
+    //console.log(random, chosen);
+        alert('im infecting!');
+        infect(chosen);
+
+    }
+    
 });
 
 async function fetchAndDisplayActivePlayers() {
@@ -96,7 +107,7 @@ async function getCollision(){
     }
         
     for (let player of activePlayerArr) {
-        console.log(player);
+        //console.log(player);
                 //check and see if any of the active players are colliding with "id"
         if ( 
             ((currentPlayer.y_position + 10) < (player.y_position)) ||
