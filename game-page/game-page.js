@@ -25,7 +25,7 @@ window.addEventListener('load', async () => {
         // if a row is added, let me know and tell about that row
         .on('UPDATE', (payload) => {
             fetchAndDisplayActivePlayers();
-            //console.log(payload);
+            payload;
         })
         .subscribe();
     const infectedArr = await getInfectedPlayers();
@@ -90,7 +90,6 @@ window.addEventListener('keydown', async (e) => {
             currentPlayer.x_position = GAME_WIDTH;
         }
     }
-  
     await updatePlayer(currentPlayer);
     await fetchAndDisplayActivePlayers();
     await getCollision();
@@ -107,7 +106,6 @@ async function getCollision(){
     }
         
     for (let player of activePlayerArr) {
-        //console.log(player);
                 //check and see if any of the active players are colliding with "id"
         if ( 
             ((currentPlayer.y_position + 10) < (player.y_position)) ||
@@ -118,11 +116,9 @@ async function getCollision(){
         ){
                     //
         } else if (currentPlayer.user_id !== player.user_id) {
-            if (currentPlayer.infected && player.infected !== true) {
+            if ((currentPlayer.infected === true) && (player.infected === false)) {
                 infect(player);
-                // alert('infected');
             }
-                    
                     //nothing
         }
 
