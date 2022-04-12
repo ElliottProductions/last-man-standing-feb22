@@ -109,3 +109,25 @@ export async function endGameState() {
     window.location.replace('../gameover');
     alert('gameover');
 }
+
+export async function readyUp(user) {
+    await client
+        .from('profiles')
+        .update({ is_ready: true })
+        .match({ user_id: user.id });
+    // console.log(user);
+} 
+
+export async function unReady(user) {
+    await client
+        .from('profiles')
+        .update({ is_ready: false })
+        .match({ user_id: user.id });
+} 
+
+export async function startGame(){
+    window.location.replace('../game-page');
+    const userArr = await getActivePlayers();
+    const random = Math.ceiling((Math.random) * userArr.length);
+    
+}
