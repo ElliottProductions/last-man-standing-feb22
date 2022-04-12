@@ -116,7 +116,7 @@ async function getCollision(){
         ){
                     //
         } else if (currentPlayer.user_id !== player.user_id) {
-            if ((currentPlayer.infected === true) && (player.infected === false)) {
+            if ((currentPlayer.infected === true) && (player.infected !== true)) {
                 infect(player);
             }
                     //nothing
