@@ -280,3 +280,12 @@ div.game-div {
     height: 10px;
     position: absolute;
 }
+
+#built-by {
+    font-size: 13.5px;
+    color: white;
+}
+
+footer {
+    color: white;
+}
