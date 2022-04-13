@@ -149,7 +149,12 @@ function checkError({ data, error }) {
     return error ? console.error(error) : data;
 }
 
-export async function endGameState() {
+export async function endGameState(infected_count, user) {
+    //update supabase with number of infected
+    await client
+        .from('profiles')
+        .update({ num_infected: infected_count })
+        .match({ user_id: user.id });
     window.location.replace('../gameover');
     alert('gameover');
 }

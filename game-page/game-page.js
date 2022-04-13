@@ -1,4 +1,4 @@
-import { incrementInfections, getReadyPlayers, checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState } from '../fetch-utils.js';
+import { getReadyPlayers, checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState, getUser } from '../fetch-utils.js';
 
 
 checkAuth();
@@ -9,11 +9,10 @@ const gameArea = document.querySelector('.game-div');
 
 logoutButton.addEventListener('click', () => {
     logout();
-
 });
 
 let moveSpeed = 10;
-
+let infected_count = 0;
 let currentPlayer;
 
 window.addEventListener('load', async () => {
@@ -31,7 +30,6 @@ window.addEventListener('load', async () => {
         const userArr = await getReadyPlayers();
         const random = Math.floor((Math.random()) * (userArr.length - 1));
         const chosen = userArr[random];
-    //console.log(random, chosen);
         alert('im infecting!');
         await infect(chosen);
 
@@ -40,11 +38,11 @@ window.addEventListener('load', async () => {
 });
 
 async function fetchAndDisplayActivePlayers() {
+    //TODO should only update players that change? reduce lag?
     const activePlayers = await getActivePlayers();
 
     gameArea.textContent = '';
     for (let player of activePlayers) {
-
 
         const playerEl = document.createElement('div');
         playerEl.textContent = `😋 ${player.user_name}`;
@@ -61,7 +59,8 @@ async function fetchAndDisplayActivePlayers() {
     const infectedPlayer = await getInfectedPlayers();
 
     if (activePlayers.length - 1 === infectedPlayer.length) {
-        await endGameState();
+        const user = getUser();
+        await endGameState(infected_count, user);
     }
 }
 
@@ -120,6 +119,7 @@ async function getCollision(){
             console.log('player is colliding');
             if ((currentPlayer.infected === true) && (player.infected !== true)) {
                 console.log('player is infecting');
+                infected_count++;
                 await infect(player);
                 //await incrementInfections(currentPlayer);
             }
