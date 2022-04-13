@@ -1,16 +1,40 @@
-import { uninfect, updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
+import { selectFighter, uninfect, updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
 
 checkAuth();
 
 const logoutButton = document.getElementById('logout');
 const userListEl = document.querySelector('.user-list');
 const readyBtn = document.querySelector('.ready-up');
+const smiley = document.querySelector('.smiley');
+const hap = document.querySelector('.hap');
+const tengu = document.querySelector('.tengu');
+const egg = document.querySelector('.EGG');
+
 
 logoutButton.addEventListener('click', async () => {
     const user = getUser();
     await deactivateUser(user);
     logout();
+});
 
+hap.addEventListener('click', async () => {
+    const user = await getMyProfile();
+    await selectFighter(user, '2');
+});
+
+tengu.addEventListener('click', async () => {
+    const user = await getMyProfile();
+    await selectFighter(user, '3');
+});
+
+egg.addEventListener('click', async () => {
+    const user = await getMyProfile();
+    await selectFighter(user, '1');
+});
+
+smiley.addEventListener('click', async () => {
+    const user = await getMyProfile();
+    await selectFighter(user, '4');
 });
 
 

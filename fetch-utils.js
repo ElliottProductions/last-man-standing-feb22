@@ -5,29 +5,28 @@ export const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
 export async function infect(player){
-    //console.log(player);
     await client
         .from('profiles')
         .update({ infected: true })
         .match({ user_id: player.user_id })
         .single();
 }
-
-export async function incrementInfections(player) {
-    alert('you infected X');
-    let currentInfections = await client
+export async function selectFighter(player, icon){
+    await client  
         .from('profiles')
-        .select('*')
-        .match({ user_id: player.user_id });
-    console.log(currentInfections);
-    // currentInfections++;
-    // await client
-    //     .from('profiles')
-    //     .update({ num_infected: currentInfections })
-    //     .match({ user_id: player.user_id })
-    //     .single();
-    
+        .update({ fight_icon: icon })
+        .match({ user_id: player.user_id })
+        .single();
 }
+// export async function incrementInfections(player) {
+//     alert('you infected X');
+//     let currentInfections = await client
+//         .from('profiles')
+//         .select('*')
+//         .match({ user_id: player.user_id });
+//     console.log(currentInfections);
+    
+// }
 
 export async function getInfectedPlayers() {
     const response = await client
@@ -90,7 +89,6 @@ export async function signupUser(email, password) {
 }
 
 export async function createUserName(username, email){
-    // const currentUser = getUser();
     await client
         .from('profiles')
         .update({ user_name: username })
@@ -110,7 +108,6 @@ export async function logout() {
     return (window.location.href = '../');
 }
 export async function deactivateUser(user){
-    // const user = await getUser();
     await client 
         .from('profiles')
         .update({ active: false })
@@ -118,7 +115,6 @@ export async function deactivateUser(user){
 }
 
 export async function activateUser(user){
-    // const user = await getUser();
     await client 
         .from('profiles')
         .update({ active: true })
@@ -150,7 +146,6 @@ function checkError({ data, error }) {
 }
 
 export async function endGameState(infected_count, user) {
-    //update supabase with number of infected
     await client
         .from('profiles')
         .update({ num_infected: infected_count })
@@ -164,7 +159,6 @@ export async function readyUp(user) {
         .from('profiles')
         .update({ is_ready: true })
         .match({ user_id: user.id });
-    // console.log(user);
 } 
 
 export async function unReady(user) {
@@ -180,7 +174,6 @@ export async function startGame(){
 }
 
 export async function uninfect(player) {
-    // console.log(player);
     await client
         .from('profiles')
         .update({ infected: false })
