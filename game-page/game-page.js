@@ -1,4 +1,4 @@
-import { getReadyPlayers, checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState } from '../fetch-utils.js';
+import { incrementInfections, getReadyPlayers, checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState } from '../fetch-utils.js';
 
 
 checkAuth();
@@ -57,6 +57,12 @@ async function fetchAndDisplayActivePlayers() {
 
         gameArea.append(playerEl);
     }
+
+    const infectedPlayer = await getInfectedPlayers();
+
+    if (activePlayers.length - 1 === infectedPlayer.length) {
+        await endGameState();
+    }
 }
 
 const GAME_HEIGHT = 490;
@@ -99,12 +105,6 @@ window.addEventListener('keydown', async (e) => {
 async function getCollision(){
 
     const activePlayerArr = await getActivePlayers();
-    const infectedPlayer = await getInfectedPlayers();
-
-    // for (let player of infectedPlayer) {
-    if (activePlayerArr.length - 1 === infectedPlayer.length) {
-        await endGameState();
-    }
         
     for (let player of activePlayerArr) {
                 //check and see if any of the active players are colliding with "id"
@@ -121,6 +121,7 @@ async function getCollision(){
             if ((currentPlayer.infected === true) && (player.infected !== true)) {
                 console.log('player is infecting');
                 await infect(player);
+                await incrementInfections(currentPlayer);
             }
                     //nothing
         }
