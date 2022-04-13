@@ -156,13 +156,4 @@ export async function unReady(user) {
 export async function startGame(){
     window.location.replace('../game-page');
     alert('start game function is now running');
-    
-
-    
-
-    
-    
-
-
-    
 }

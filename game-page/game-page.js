@@ -48,6 +48,9 @@ async function fetchAndDisplayActivePlayers() {
 
         const playerEl = document.createElement('div');
         playerEl.textContent = `😋 ${player.user_name}`;
+        if (player.infect){
+            playerEl.textContent = `😏 ${player.user_name}`;
+        }
         playerEl.classList.add('player');
         //console.log(`${player.email} is at x: ${player.x_position}, y: ${player.y_position}`);
         playerEl.style.transform = `translate(${player.x_position}px, ${player.y_position}px)`;
