@@ -1,4 +1,4 @@
-import { updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
+import { uninfect, updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
 
 checkAuth();
 
@@ -24,6 +24,9 @@ window.addEventListener('load', async () => {
     await activateUser(user);
     
     await displayActivePlayers();
+
+    await unReady(user);
+    await uninfect(profile);
     
     await client
         .from('profiles')

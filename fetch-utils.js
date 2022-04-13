@@ -5,12 +5,28 @@ export const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
 export async function infect(player){
-    console.log(player);
+    //console.log(player);
     await client
         .from('profiles')
         .update({ infected: true })
         .match({ user_id: player.user_id })
         .single();
+}
+
+export async function incrementInfections(player) {
+    alert('you infected X');
+    let currentInfections = await client
+        .from('profiles')
+        .select('*')
+        .match({ user_id: player.user_id });
+    console.log(currentInfections);
+    // currentInfections++;
+    // await client
+    //     .from('profiles')
+    //     .update({ num_infected: currentInfections })
+    //     .match({ user_id: player.user_id })
+    //     .single();
+    
 }
 
 export async function getInfectedPlayers() {
