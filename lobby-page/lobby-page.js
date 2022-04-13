@@ -1,4 +1,4 @@
-import { activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile, getInfectedPlayers } from '../fetch-utils.js';
+import { updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
 
 checkAuth();
 
@@ -15,8 +15,10 @@ logoutButton.addEventListener('click', async () => {
 
 
 window.addEventListener('load', async () => {
+    userListEl.textContent = '';
     const user = await getUser();
     await activateUser(user);
+    
     await displayActivePlayers();
     
     await client
@@ -29,6 +31,7 @@ window.addEventListener('load', async () => {
 });
 
 readyBtn.addEventListener('click', async () => {
+    userListEl.textContent = '';
     const user = getUser();
     const profile = await getMyProfile();
 
@@ -40,9 +43,15 @@ readyBtn.addEventListener('click', async () => {
         await unReady(user);
     }
     // displayActivePlayers();
+    //get random x and y positions
+    let randomY = Math.ceil(Math.random() * 490);
+    let randomX = Math.ceil(Math.random() * 700);
+
+    await updatePlayer(profile, randomY, randomX);//change inputs
 });
 
 async function displayActivePlayers() {
+    console.log(`Im displayin!!!`);
     userListEl.textContent = '';
     let allReady = true;
     const userArr = await getActivePlayers();
