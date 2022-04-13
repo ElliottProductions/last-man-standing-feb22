@@ -121,7 +121,7 @@ async function getCollision(){
             if ((currentPlayer.infected === true) && (player.infected !== true)) {
                 console.log('player is infecting');
                 await infect(player);
-                await incrementInfections(currentPlayer);
+                //await incrementInfections(currentPlayer);
             }
                     //nothing
         }
