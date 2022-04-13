@@ -30,9 +30,11 @@ window.addEventListener('load', async () => {
         const userArr = await getReadyPlayers();
         const random = Math.floor((Math.random()) * (userArr.length - 1));
         const chosen = userArr[random];
-        alert('im infecting!');
         await infect(chosen);
 
+    }
+    if (currentPlayer.infected === true){
+        alert('You are patient zero');
     }
     
 });
