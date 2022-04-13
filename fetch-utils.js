@@ -93,7 +93,21 @@ export async function logout() {
 
     return (window.location.href = '../');
 }
+export async function deactivateUser(user){
+    // const user = await getUser();
+    await client 
+        .from('profiles')
+        .update({ active: false })
+        .match({ user_id: user.id });
+}
 
+export async function activateUser(user){
+    // const user = await getUser();
+    await client 
+        .from('profiles')
+        .update({ active: true })
+        .match({ user_id: user.id });
+}
 export async function updatePlayer(player, playerY, playerX){
     const response = await client
         .from('profiles')
@@ -110,7 +124,8 @@ export async function updatePlayer(player, playerY, playerX){
 export async function getActivePlayers() {
     const response = await client
         .from('profiles')
-        .select('*');
+        .select('*')
+        .match({ active: true });
 
     return checkError(response);
 }
