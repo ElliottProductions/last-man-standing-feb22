@@ -249,7 +249,7 @@ div.game-div {
 }
 
 .lobby-right {
-    display: inline;
+    display: none;
     flex-direction: column;
     flex-wrap: wrap;
     float: right;

@@ -18,14 +18,14 @@ let currentPlayer;
 
 window.addEventListener('load', async () => {
     currentPlayer = await getMyProfile();
-    fetchAndDisplayActivePlayers();
+    await fetchAndDisplayActivePlayers();
     await client
     // hey, listen to the chats room
         .from('profiles')
         // if a row is added, let me know and tell about that row
-        .on('UPDATE', (payload) => {
-            fetchAndDisplayActivePlayers();
-            //console.log(payload);
+        .on('UPDATE', async (payload) => {
+            await fetchAndDisplayActivePlayers();
+            payload;
         })
         .subscribe();
     const infectedArr = await getInfectedPlayers();
@@ -93,8 +93,7 @@ window.addEventListener('keydown', async (e) => {
             currentPlayer.x_position = GAME_WIDTH;
         }
     }
-  
-    await updatePlayer(currentPlayer);
+    await updatePlayer(currentPlayer, currentPlayer.y_position, currentPlayer.x_position);
     await fetchAndDisplayActivePlayers();
     await getCollision();
 });
@@ -110,7 +109,6 @@ async function getCollision(){
     }
         
     for (let player of activePlayerArr) {
-        //console.log(player);
                 //check and see if any of the active players are colliding with "id"
         if ( 
             ((currentPlayer.y_position + 10) < (player.y_position)) ||
@@ -121,11 +119,11 @@ async function getCollision(){
         ){
                     //
         } else if (currentPlayer.user_id !== player.user_id) {
-            if (currentPlayer.infected && player.infected !== true) {
+            console.log('player is colliding');
+            if ((currentPlayer.infected === true) && (player.infected !== true)) {
+                console.log('player is infecting');
                 infect(player);
-                // alert('infected');
             }
-                    
                     //nothing
         }
 

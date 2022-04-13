@@ -18,25 +18,19 @@ window.addEventListener('load', async () => {
 readyBtn.addEventListener('click', async () => {
     const user = getUser();
     const profile = await getMyProfile();
-    
+    let allReady = true;
+
     if (profile.is_ready === false) {
         await readyUp(user);
         const userArr = await getActivePlayers();
         for (let player of userArr) {
             if (player.is_ready === false) {
-                console.log(`this player broke it`, player);
-                break;
+                allReady = false;
             }
-            
-            
-            
         }
-        
-        await startGame();
-        
-        
-        
-        
+        if (allReady === true) {
+            await startGame();
+        }
     } else {
         await unReady(user);
     }
