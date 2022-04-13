@@ -1,4 +1,4 @@
-import { checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile, getInfectedPlayers } from '../fetch-utils.js';
+import { activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile, getInfectedPlayers } from '../fetch-utils.js';
 
 checkAuth();
 
@@ -6,49 +6,61 @@ const logoutButton = document.getElementById('logout');
 const userListEl = document.querySelector('.user-list');
 const readyBtn = document.querySelector('.ready-up');
 
-logoutButton.addEventListener('click', () => {
+logoutButton.addEventListener('click', async () => {
+    const user = await getUser();
+    await deactivateUser(user);
     logout();
+
 });
 
 
 window.addEventListener('load', async () => {
+    const user = await getUser();
+    await activateUser(user);
     await displayActivePlayers();
+    
+    await client
+        .from('profiles')
+        .on('UPDATE', async (payload) => {
+            await displayActivePlayers();
+            payload;
+        })
+        .subscribe();
 });
 
 readyBtn.addEventListener('click', async () => {
     const user = getUser();
     const profile = await getMyProfile();
-    let allReady = true;
+
 
     if (profile.is_ready === false) {
         await readyUp(user);
-        const userArr = await getActivePlayers();
-        for (let player of userArr) {
-            if (player.is_ready === false) {
-                allReady = false;
-            }
-        }
-        if (allReady === true) {
-            await startGame();
-        }
+
     } else {
         await unReady(user);
     }
-    displayActivePlayers();
+    // displayActivePlayers();
 });
 
 async function displayActivePlayers() {
     userListEl.textContent = '';
+    let allReady = true;
     const userArr = await getActivePlayers();
+    for (let player of userArr) {
+        if (player.is_ready === false) {
+            allReady = false;
+        }
+    }
+    if (allReady === true) {
+        await startGame();
+    }
 
     for (let user of userArr) {
         if (user.active) {
             const userDiv = document.createElement('div');
             const userName = document.createElement('p');
             const userReady = document.createElement('p');
-
             userName.textContent = user.user_name;
-
             if (user.is_ready) {
                 userReady.textContent = '☑️';
             } else {
