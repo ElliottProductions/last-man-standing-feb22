@@ -1,4 +1,4 @@
-import { getActivePlayers } from '../fetch-utils.js';
+import { getActivePlayers, getMyProfile, getUser, uninfect, unReady } from '../fetch-utils.js';
 const lobbiesButton = document.getElementById('to-lobbies');
 const playerCard = document.querySelector('.player-cards');
 
@@ -7,6 +7,10 @@ lobbiesButton.addEventListener('click', () => {
 });
 
 window.addEventListener('load', async () => {
+    const user = getUser();
+    const profile = getMyProfile();
+    await unReady(user);
+    await uninfect(profile);
     renderPlayerCards();
     //should probably still display who won
 });
