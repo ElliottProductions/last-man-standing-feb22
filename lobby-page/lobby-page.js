@@ -50,7 +50,7 @@ window.addEventListener('load', async () => {
     await displayActivePlayers();
 
     // await unReady(user);
-    // await uninfect(profile);
+    await uninfect(profile);
     
     await client
         .from('profiles')

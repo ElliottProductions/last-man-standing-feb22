@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
     const user = getUser();
     const profile = getMyProfile();
     await unReady(user);
-    await uninfect(profile);
+    //await uninfect(profile);
     renderPlayerCards();
     //should probably still display who won
 });
