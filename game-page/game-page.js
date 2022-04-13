@@ -20,9 +20,7 @@ window.addEventListener('load', async () => {
     currentPlayer = await getMyProfile();
     await fetchAndDisplayActivePlayers();
     await client
-    // hey, listen to the chats room
         .from('profiles')
-        // if a row is added, let me know and tell about that row
         .on('UPDATE', async (payload) => {
             await fetchAndDisplayActivePlayers();
             payload;
@@ -35,7 +33,7 @@ window.addEventListener('load', async () => {
         const chosen = userArr[random];
     //console.log(random, chosen);
         alert('im infecting!');
-        infect(chosen);
+        await infect(chosen);
 
     }
     
@@ -122,7 +120,7 @@ async function getCollision(){
             console.log('player is colliding');
             if ((currentPlayer.infected === true) && (player.infected !== true)) {
                 console.log('player is infecting');
-                infect(player);
+                await infect(player);
             }
                     //nothing
         }
