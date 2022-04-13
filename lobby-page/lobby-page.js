@@ -7,7 +7,7 @@ const userListEl = document.querySelector('.user-list');
 const readyBtn = document.querySelector('.ready-up');
 
 logoutButton.addEventListener('click', async () => {
-    const user = await getUser();
+    const user = getUser();
     await deactivateUser(user);
     logout();
 
@@ -15,8 +15,12 @@ logoutButton.addEventListener('click', async () => {
 
 
 window.addEventListener('load', async () => {
-    userListEl.textContent = '';
-    const user = await getUser();
+    let randomY = Math.ceil(Math.random() * 490);
+    let randomX = Math.ceil(Math.random() * 700);
+    const profile = await getMyProfile();
+    await updatePlayer(profile, randomY, randomX);//change inputs
+    userListEl.innerHTML = '';
+    const user = getUser();
     await activateUser(user);
     
     await displayActivePlayers();
@@ -31,7 +35,7 @@ window.addEventListener('load', async () => {
 });
 
 readyBtn.addEventListener('click', async () => {
-    userListEl.textContent = '';
+    userListEl.innerHTML = '';
     const user = getUser();
     const profile = await getMyProfile();
 
@@ -44,15 +48,12 @@ readyBtn.addEventListener('click', async () => {
     }
     // displayActivePlayers();
     //get random x and y positions
-    let randomY = Math.ceil(Math.random() * 490);
-    let randomX = Math.ceil(Math.random() * 700);
-
-    await updatePlayer(profile, randomY, randomX);//change inputs
+    
 });
 
 async function displayActivePlayers() {
     console.log(`Im displayin!!!`);
-    userListEl.textContent = '';
+    userListEl.innerHTML = '';
     let allReady = true;
     const userArr = await getActivePlayers();
     for (let player of userArr) {
