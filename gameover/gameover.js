@@ -1,4 +1,4 @@
-import { getActivePlayers, getMyProfile, getUser } from '../fetch-utils.js';
+import { getActivePlayers } from '../fetch-utils.js';
 const lobbiesButton = document.getElementById('to-lobbies');
 const playerCard = document.querySelector('.player-cards');
 
@@ -7,10 +7,8 @@ lobbiesButton.addEventListener('click', () => {
 });
 
 window.addEventListener('load', async () => {
-    // display card for each player in match 
     renderPlayerCards();
-        // card : name, number of players infected, and time survived 'Winner' if they are so
-
+    //should probably still display who won
 });
 
 async function renderPlayerCards() {
@@ -22,7 +20,7 @@ async function renderPlayerCards() {
         const name = document.createElement('h4');
         const infected = document.createElement('p');
 
-        infected.textContent = player.infected;
+        infected.textContent = 'Players infected: ' + player.num_infected;
         name.textContent = player.user_name;
         div.append(name, infected);
         playerCard.append(div);
