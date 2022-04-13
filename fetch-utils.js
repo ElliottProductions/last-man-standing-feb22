@@ -157,3 +157,12 @@ export async function startGame(){
     window.location.replace('../game-page');
     alert('start game function is now running');
 }
+
+export async function uninfect(player) {
+    // console.log(player);
+    await client
+        .from('profiles')
+        .update({ infected: false })
+        .match({ user_id: player.user_id })
+        .single();
+}
