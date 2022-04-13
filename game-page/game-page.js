@@ -43,14 +43,20 @@ async function fetchAndDisplayActivePlayers() {
 
     gameArea.textContent = '';
     for (let player of activePlayers) {
-
         const playerEl = document.createElement('div');
-        playerEl.textContent = `😋 ${player.user_name}`;
-        if (player.infect){
-            playerEl.textContent = `😏 ${player.user_name}`;
+        if (player.fight_icon === 1){
+            playerEl.textContent = `😃  ${player.user_name}`;
+        }
+        if (player.fight_icon === 2){
+            playerEl.textContent = `🤠  ${player.user_name}`;
+        }
+        if (player.fight_icon === 3){
+            playerEl.textContent = `👺 ${player.user_name}`;
+        }
+        if (player.fight_icon === 4){
+            playerEl.textContent = `🥚 ${player.user_name}`;
         }
         playerEl.classList.add('player');
-        //console.log(`${player.email} is at x: ${player.x_position}, y: ${player.y_position}`);
         playerEl.style.transform = `translate(${player.x_position}px, ${player.y_position}px)`;
 
         gameArea.append(playerEl);
@@ -116,7 +122,7 @@ async function getCollision(){
         ){
                     //
         } else if (currentPlayer.user_id !== player.user_id) {
-            console.log('player is colliding');
+            // console.log('player is colliding');
             if ((currentPlayer.infected === true) && (player.infected !== true)) {
                 console.log('player is infecting');
                 infected_count++;
