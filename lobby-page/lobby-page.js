@@ -49,7 +49,7 @@ window.addEventListener('load', async () => {
     
     await displayActivePlayers();
 
-    await unReady(user);
+    // await unReady(user);
     await uninfect(profile);
     
     await client

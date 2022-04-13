@@ -46,7 +46,7 @@ async function fetchAndDisplayActivePlayers() {
     gameArea.textContent = '';
     for (let player of activePlayers) {
         const playerEl = document.createElement('div');
-        if (player.fight_icon === 1){
+        if (player.fight_icon === 4){
             playerEl.textContent = `😃  ${player.user_name}`;
         }
         if (player.fight_icon === 2){
@@ -55,7 +55,7 @@ async function fetchAndDisplayActivePlayers() {
         if (player.fight_icon === 3){
             playerEl.textContent = `👺 ${player.user_name}`;
         }
-        if (player.fight_icon === 4){
+        if (player.fight_icon === 1){
             playerEl.textContent = `🥚 ${player.user_name}`;
         }
         playerEl.classList.add('player');
@@ -67,6 +67,8 @@ async function fetchAndDisplayActivePlayers() {
     const infectedPlayer = await getInfectedPlayers();
 
     if (activePlayers.length - 1 === infectedPlayer.length) {
+        //console.log(activePlayers);
+        //console.log(infectedPlayer);
         const user = getUser();
         await endGameState(infected_count, user);
     }
