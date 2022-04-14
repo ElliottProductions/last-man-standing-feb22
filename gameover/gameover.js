@@ -1,6 +1,8 @@
-import { client, getActivePlayers, getMyProfile, getUser, unReady } from '../fetch-utils.js';
+import { checkAuth, client, getActivePlayers, getMyProfile, getUser, unReady } from '../fetch-utils.js';
 const lobbiesButton = document.getElementById('to-lobbies');
 const playerCard = document.querySelector('.player-cards');
+
+checkAuth();
 
 lobbiesButton.addEventListener('click', () => {
     window.location.href = '../lobby-page';

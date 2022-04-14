@@ -19,7 +19,7 @@ body {
     --footer-height: 25px;
     
     font-family: 'Titillium Web', sans-serif;
-    background-color:rgb(255, 255, 255);
+    background-color:rgb(88, 85, 85);
 }
 
 .bodytwo {
@@ -230,18 +230,52 @@ div.game-div {
     padding: 10px;
 }
 
+.main-lobby {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: calc(var(--footer-height));
+}
+
+
 .lobby-left {
     display: inline;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 400px;
+    height: 150px;
     border-style: solid;
     border-color: black;
-    position: absolute;
+    position: relative;
     left: 0px;
-    width: 300px;
+    width: 180px;
     padding: 10px;
     top: 165px;
+    margin: 25px;
+    color:rgb(255, 255, 255);
+    border-color: rgb(163, 155, 155);
+}
+
+.lobby-center {
+    display: inline;
+    flex-direction: column;
+    flex-wrap: wrap;
+    color:rgb(255, 255, 255);
+    border-style: solid;
+    border-color: rgb(163, 155, 155);
+    position: relative;
+    left: 0px;
+    height: 700px;
+    width: 350px;
+    padding: 10px;
+    margin: 25px;
+    top: 165px;
+}
+
+.lobby-center button {
+    color:rgb(255, 255, 255);
+    background-color: black;
+    margin: 5px;
 }
 
 .fighter-selection {
@@ -265,6 +299,10 @@ div.game-div {
     bottom: 30px;
 }
 
+.user-list p {
+    margin: 0px;
+}
+
 .game-div{
     width: 700px;
     height: 490px;
@@ -276,9 +314,11 @@ div.game-div {
 }
 
 .player {
-    width: 10px;
-    height: 10px;
+    width: 22px;
+    height: 22px;
     position: absolute;
+    border-radius: 25px;
+    color:aliceblue;
 }
 
 #built-by {
@@ -292,4 +332,8 @@ footer {
 
 .hidden {
     display: none;
+}
+
+.infected {
+    background-color:rgb(225, 62, 201);
 }

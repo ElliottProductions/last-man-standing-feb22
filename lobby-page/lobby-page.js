@@ -11,6 +11,7 @@ const tengu = document.querySelector('.tengu');
 const egg = document.querySelector('.EGG');
 const startButton = document.getElementById('start-game');
 
+
 startButton.addEventListener('click', async ()=>{
     const profile = await getMyProfile();
     if (profile.host === true) {
