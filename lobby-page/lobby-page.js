@@ -13,13 +13,6 @@ const startButton = document.getElementById('start-game');
 
 
 startButton.addEventListener('click', async ()=>{
-    const profile = await getMyProfile();
-    if (profile.host === true) {
-        await client
-            .from('profiles')
-            .update({ start_clicked: true })
-            .match({ user_id: profile.user_id });
-    }
     const infectedArr = await getInfectedPlayers();
     if (infectedArr.length === 0){
         const userArr = await getReadyPlayers();
@@ -27,6 +20,14 @@ startButton.addEventListener('click', async ()=>{
         const chosen = userArr[random];
         await infect(chosen);
     }
+    const profile = await getMyProfile();
+    if (profile.host === true) {
+        await client
+            .from('profiles')
+            .update({ start_clicked: true })
+            .match({ user_id: profile.user_id });
+    }
+
 
     startButton.disabled = true;
 });
