@@ -9,7 +9,11 @@ const smiley = document.querySelector('.smiley');
 const hap = document.querySelector('.hap');
 const tengu = document.querySelector('.tengu');
 const egg = document.querySelector('.EGG');
+const startButton = document.getElementById('start-game');
 
+startButton.addEventListener('click', async ()=>{
+    
+});
 
 logoutButton.addEventListener('click', async () => {
     const user = getUser();
@@ -42,10 +46,14 @@ window.addEventListener('load', async () => {
     let randomY = Math.ceil(Math.random() * 490);
     let randomX = Math.ceil(Math.random() * 700);
     const profile = await getMyProfile();
+   
     await updatePlayer(profile, randomY, randomX);//change inputs
     userListEl.innerHTML = '';
     const user = getUser();
     await activateUser(user);
+    if (profile.host !== true) {
+        startButton.classList.add('hidden');
+    }
     
     await displayActivePlayers();
 
