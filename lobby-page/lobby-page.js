@@ -97,7 +97,18 @@ async function displayActivePlayers() {
             const userDiv = document.createElement('div');
             const userName = document.createElement('p');
             const userReady = document.createElement('p');
-            userName.textContent = user.user_name;
+            if (user.fight_icon === 4){
+                userName.textContent = user.user_name + '😃';
+            }
+            if (user.fight_icon === 2){
+                userName.textContent = user.user_name + '🤠';
+            }
+            if (user.fight_icon === 3){
+                userName.textContent = user.user_name + '👺';
+            }
+            if (user.fight_icon === 1){
+                userName.textContent = user.user_name + '🥚';
+            }
             if (user.is_ready) {
                 userReady.textContent = '☑️';
             } else {
