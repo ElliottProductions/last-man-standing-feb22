@@ -23,7 +23,7 @@ export async function getInfectedPlayers() {
     const response = await client
         .from('profiles')
         .select('*')
-        .match({ infected: true });
+        .match({ infected: true, active: true });
     
     return checkError(response);
 }
