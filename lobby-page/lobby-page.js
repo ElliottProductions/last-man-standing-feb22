@@ -14,13 +14,13 @@ const startButton = document.getElementById('start-game');
 startButton.addEventListener('click', async ()=>{
     const profile = await getMyProfile();
     if (profile.host === true) {
-        console.log(profile);
         await client
             .from('profiles')
             .update({ start_clicked: true })
             .match({ user_id: profile.user_id });
     }
     const infectedArr = await getInfectedPlayers();
+    console.log(infectedArr);
     if (infectedArr.length < 1){
         const userArr = await getReadyPlayers();
         const random = Math.floor((Math.random()) * (userArr.length - 1));
