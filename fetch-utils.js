@@ -32,7 +32,8 @@ export async function getInfectedPlayers() {
     const response = await client
         .from('profiles')
         .select('*')
-        .match({ infected: true, active: true });
+        //.match({ infected: true, active: true });
+        .match({ infected: true });
     
     return checkError(response);
 }
@@ -123,7 +124,6 @@ export async function activateUser(user){
         .from('profiles')
         .select('*')
         .match({ host: true });
-    console.log(host);
     if (host.body.length === 0){
         await client 
             .from('profiles')
