@@ -98,7 +98,7 @@ export async function createUserName(username, email){
 
 export async function signInUser(email, password) {
     const response = await client.auth.signIn({ email, password });
-
+    
     return response.user;
 }
 

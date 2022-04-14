@@ -12,7 +12,13 @@ const egg = document.querySelector('.EGG');
 const startButton = document.getElementById('start-game');
 
 startButton.addEventListener('click', async ()=>{
-    
+    const profile = await getMyProfile();
+    if (profile.host === true) {
+        await client
+            .from('profiles')
+            .update({ start_clicked: true })
+            .match({ user_id: profile.id });
+    }
 });
 
 logoutButton.addEventListener('click', async () => {
@@ -51,10 +57,9 @@ window.addEventListener('load', async () => {
     userListEl.innerHTML = '';
     const user = getUser();
     await activateUser(user);
-    if (profile.host !== true) {
-        startButton.classList.add('hidden');
-    }
-    
+    // if (profile.host !== true) {
+    //     startButton.classList.add('hidden');
+    // }
     await displayActivePlayers();
 
     // await unReady(user);
@@ -89,18 +94,24 @@ readyBtn.addEventListener('click', async () => {
 async function displayActivePlayers() {
     console.log(`Im displayin!!!`);
     userListEl.innerHTML = '';
-    let allReady = true;
+    //let allReady = true;
     const userArr = await getActivePlayers();
     for (let player of userArr) {
         if (player.is_ready === false) {
-            allReady = false;
+            //allReady = false;
         }
     }
-    if (allReady === true) {
-        await startGame();
-    }
+    // if (allReady === true) {
+    //     await startGame();
+    // }
+    // for (let user of userArr) {
+
+    // }
 
     for (let user of userArr) {
+        if (user.host === true && user.start_clicked === true) {
+            await startGame();
+        }
         if (user.active) {
             const userDiv = document.createElement('div');
             const userName = document.createElement('p');
