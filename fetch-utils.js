@@ -32,7 +32,7 @@ export async function getReadyPlayers() {
     const response = await client
         .from('profiles')
         .select('*')
-        .match({ is_ready: true, active: true });
+        .match({ is_ready: true });
     
     return checkError(response);
 }
