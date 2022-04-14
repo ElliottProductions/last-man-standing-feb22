@@ -25,14 +25,14 @@ window.addEventListener('load', async () => {
             payload;
         })
         .subscribe();
-    const infectedArr = await getInfectedPlayers();
-    if (infectedArr.length < 1){
-        const userArr = await getReadyPlayers();
-        const random = Math.floor((Math.random()) * (userArr.length - 1));
-        const chosen = userArr[random];
-        await infect(chosen);
+    // const infectedArr = await getInfectedPlayers();
+    // if (infectedArr.length < 1){
+    //     const userArr = await getReadyPlayers();
+    //     const random = Math.floor((Math.random()) * (userArr.length - 1));
+    //     const chosen = userArr[random];
+    //     await infect(chosen);
 
-    }
+    // }
     if (currentPlayer.infected === true){
         alert('You are patient zero');
     }

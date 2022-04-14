@@ -1,4 +1,4 @@
-import { selectFighter, uninfect, updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
+import { getInfectedPlayers, getReadyPlayers, infect, selectFighter, uninfect, updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
 
 checkAuth();
 
@@ -14,11 +14,21 @@ const startButton = document.getElementById('start-game');
 startButton.addEventListener('click', async ()=>{
     const profile = await getMyProfile();
     if (profile.host === true) {
+        console.log(profile);
         await client
             .from('profiles')
             .update({ start_clicked: true })
-            .match({ user_id: profile.id });
+            .match({ user_id: profile.user_id });
     }
+    const infectedArr = await getInfectedPlayers();
+    if (infectedArr.length < 1){
+        const userArr = await getReadyPlayers();
+        const random = Math.floor((Math.random()) * (userArr.length - 1));
+        const chosen = userArr[random];
+        await infect(chosen);
+    }
+    
+    startButton.disabled = true;
 });
 
 logoutButton.addEventListener('click', async () => {
@@ -94,24 +104,18 @@ readyBtn.addEventListener('click', async () => {
 async function displayActivePlayers() {
     console.log(`Im displayin!!!`);
     userListEl.innerHTML = '';
-    //let allReady = true;
+    let allReady = true;
     const userArr = await getActivePlayers();
     for (let player of userArr) {
         if (player.is_ready === false) {
-            //allReady = false;
+            allReady = false;
         }
     }
-    // if (allReady === true) {
-    //     await startGame();
-    // }
-    // for (let user of userArr) {
-
-    // }
 
     for (let user of userArr) {
-        if (user.host === true && user.start_clicked === true) {
+        if (user.host === true && user.start_clicked === true && allReady === true) {
             await startGame();
-        }
+        } 
         if (user.active) {
             const userDiv = document.createElement('div');
             const userName = document.createElement('p');
@@ -127,6 +131,9 @@ async function displayActivePlayers() {
             }
             if (user.fight_icon === 1){
                 userName.textContent = user.user_name + '🥚';
+            }
+            if (user.host === true) {
+                userName.textContent += 'host';
             }
             if (user.is_ready) {
                 userReady.textContent = '☑️';
