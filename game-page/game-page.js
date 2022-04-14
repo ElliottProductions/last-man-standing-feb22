@@ -25,14 +25,6 @@ window.addEventListener('load', async () => {
             payload; //this is the guy who actually gets updated
         })
         .subscribe();
-    // const infectedArr = await getInfectedPlayers();
-    // if (infectedArr.length < 1){
-    //     const userArr = await getReadyPlayers();
-    //     const random = Math.floor((Math.random()) * (userArr.length - 1));
-    //     const chosen = userArr[random];
-    //     await infect(chosen);
-
-    // }
     if (currentPlayer.infected === true){
         alert('You are patient zero');
     }
@@ -67,8 +59,6 @@ async function fetchAndDisplayActivePlayers() {
     const infectedPlayer = await getInfectedPlayers();
 
     if (activePlayers.length - 1 === infectedPlayer.length) {
-        //console.log(activePlayers);
-        //console.log(infectedPlayer);
         const user = getUser();
         await endGameState(infected_count, user);
     }
@@ -127,12 +117,9 @@ async function getCollision(){
         ){
                     //
         } else if (currentPlayer.user_id !== player.user_id) {
-            // console.log('player is colliding');
             if ((currentPlayer.infected === true) && (player.infected !== true)) {
-                console.log('player is infecting');
                 infected_count++;
                 await infect(player);
-                //await incrementInfections(currentPlayer);
             }
                     //nothing
         }
