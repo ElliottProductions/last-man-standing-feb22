@@ -14,7 +14,7 @@ logoutButton.addEventListener('click', () => {
 let moveSpeed = 10;
 let infected_count = 0;
 let currentPlayer;
-let infectToggle = false;
+//let infectToggle = false;
 
 window.addEventListener('load', async () => {
     currentPlayer = await getMyProfile();
