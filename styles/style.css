@@ -289,3 +289,7 @@ div.game-div {
 footer {
     color: white;
 }
+
+.hidden {
+    display: none;
+}

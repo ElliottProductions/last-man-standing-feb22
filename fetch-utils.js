@@ -119,6 +119,17 @@ export async function activateUser(user){
         .from('profiles')
         .update({ active: true })
         .match({ user_id: user.id });
+    const host = await client
+        .from('profiles')
+        .select('*')
+        .match({ host: true });
+    console.log(host);
+    if (host.body.length === 0){
+        await client 
+            .from('profiles')
+            .update({ host: true })
+            .match({ user_id: user.id });
+    }
 }
 export async function updatePlayer(player, playerY, playerX){
     const response = await client
