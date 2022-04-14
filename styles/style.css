@@ -210,6 +210,30 @@ div.game-div {
     align-content: center;
 }
 
+.game-over-card{
+    color:rgb(49, 50, 51);
+    border-color: rgb(127, 133, 138);
+    background-image: url('../assets/tombstone3.png');
+    background-size: contain;
+    height:245px;
+    width: 300px;
+}
+
+.game-over-card {
+    color:rgb(49, 50, 51);
+    border-color: rgb(127, 133, 138);
+    background-image: url('../assets/tombstone3.png');
+    background-size: contain;
+    height:245px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+
+
 .right {
     justify-content: center;
     align-items: center;

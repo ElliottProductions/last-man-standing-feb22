@@ -29,6 +29,7 @@ async function renderPlayerCards() {
         const div = document.createElement('div');
         const name = document.createElement('h4');
         const infected = document.createElement('p');
+        div.classList.add('game-over-card');
 
         infected.textContent = 'Players infected: ' + player.num_infected;
         name.textContent = player.user_name;
