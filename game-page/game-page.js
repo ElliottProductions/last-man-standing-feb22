@@ -78,6 +78,7 @@ const GAME_HEIGHT = 490;
 const GAME_WIDTH = 700;
 
 window.addEventListener('keydown', async (e) => {
+    currentPlayer = await getMyProfile();
     if (e.key === 'w') {
         currentPlayer.y_position -= moveSpeed;
 
@@ -139,3 +140,4 @@ async function getCollision(){
     }
 
 }
+
