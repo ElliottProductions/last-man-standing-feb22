@@ -20,14 +20,13 @@ startButton.addEventListener('click', async ()=>{
             .match({ user_id: profile.user_id });
     }
     const infectedArr = await getInfectedPlayers();
-    console.log(infectedArr);
     if (infectedArr.length < 1){
         const userArr = await getReadyPlayers();
         const random = Math.floor((Math.random()) * (userArr.length - 1));
         const chosen = userArr[random];
         await infect(chosen);
     }
-    
+
     startButton.disabled = true;
 });
 
@@ -63,16 +62,11 @@ window.addEventListener('load', async () => {
     let randomX = Math.ceil(Math.random() * 700);
     const profile = await getMyProfile();
    
-    await updatePlayer(profile, randomY, randomX);//change inputs
+    await updatePlayer(profile, randomY, randomX);
     userListEl.innerHTML = '';
     const user = getUser();
     await activateUser(user);
-    // if (profile.host !== true) {
-    //     startButton.classList.add('hidden');
-    // }
     await displayActivePlayers();
-
-    // await unReady(user);
     await uninfect(profile);
     
     await client
@@ -96,13 +90,9 @@ readyBtn.addEventListener('click', async () => {
     } else {
         await unReady(user);
     }
-    // displayActivePlayers();
-    //get random x and y positions
-    
 });
 
 async function displayActivePlayers() {
-    console.log(`Im displayin!!!`);
     userListEl.innerHTML = '';
     let allReady = true;
     const userArr = await getActivePlayers();
@@ -133,7 +123,7 @@ async function displayActivePlayers() {
                 userName.textContent = user.user_name + '🥚';
             }
             if (user.host === true) {
-                userName.textContent += 'host';
+                userName.textContent += '👑' + '(host)';
             }
             if (user.is_ready) {
                 userReady.textContent = '☑️';
@@ -145,29 +135,3 @@ async function displayActivePlayers() {
     }
 
 }
-{/* <main>
-        <h1>Lobby 1</h1>
-        <section class="lobby-left">
-            <div class="fighter-selection">
-                <h3>Belect a bighter</h3>
-                <button class="smiley">😃</button>
-                <button class="hap">🤠</button>
-                <button class="tengu">👺</button>
-                <button class="EGG">🥚</button>
-            </div>
-        </section>
-        <section class="lobby-center">
-            <div>
-                <h2>Bones 😃  ☑️</h2>              
-                <h2>Bill 🥚  ☑️</h2>                
-                <h2>Bargaret Bhatcher 🤠  ❎</h2>
-                <h3>Ready?</h3> <input type="checkbox">
-            </div>
-        </section>
-        <section class="lobby-right">
-            <br>
-            <form id="player-chat" class="player-chatbox">
-                <input type="text" name="chat-box"> <button>Bend Bessage</button>
-            </form>
-        </section> */}
-

@@ -1,4 +1,4 @@
-import { getActivePlayers, getMyProfile, getUser, uninfect, unReady } from '../fetch-utils.js';
+import { client, getActivePlayers, getMyProfile, getUser, unReady } from '../fetch-utils.js';
 const lobbiesButton = document.getElementById('to-lobbies');
 const playerCard = document.querySelector('.player-cards');
 
@@ -10,9 +10,13 @@ window.addEventListener('load', async () => {
     const user = getUser();
     const profile = getMyProfile();
     await unReady(user);
-    //await unStart(profile);
     renderPlayerCards();
-    //should probably still display who won
+    if (profile.host === true) {
+        await client
+            .from('profiles')
+            .update({ start_clicked: false })
+            .match({ user_id: profile.user_id });
+    }
 });
 
 async function renderPlayerCards() {

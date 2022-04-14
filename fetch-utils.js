@@ -18,21 +18,11 @@ export async function selectFighter(player, icon){
         .match({ user_id: player.user_id })
         .single();
 }
-// export async function incrementInfections(player) {
-//     alert('you infected X');
-//     let currentInfections = await client
-//         .from('profiles')
-//         .select('*')
-//         .match({ user_id: player.user_id });
-//     console.log(currentInfections);
-    
-// }
 
 export async function getInfectedPlayers() {
     const response = await client
         .from('profiles')
         .select('*')
-        //.match({ infected: true, active: true });
         .match({ infected: true });
     
     return checkError(response);
