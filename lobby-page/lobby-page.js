@@ -21,7 +21,7 @@ startButton.addEventListener('click', async ()=>{
             .match({ user_id: profile.user_id });
     }
     const infectedArr = await getInfectedPlayers();
-    if (infectedArr.length < 1){
+    if (infectedArr.length === 0){
         const userArr = await getReadyPlayers();
         const random = Math.floor((Math.random()) * (userArr.length - 1));
         const chosen = userArr[random];
