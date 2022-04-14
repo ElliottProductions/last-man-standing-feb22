@@ -4,21 +4,29 @@ const playerCard = document.querySelector('.player-cards');
 
 checkAuth();
 
-lobbiesButton.addEventListener('click', () => {
-    window.location.href = '../lobby-page';
-});
-
-window.addEventListener('load', async () => {
-    const user = getUser();
-    const profile = getMyProfile();
-    await unReady(user);
-    renderPlayerCards();
-    if (profile.host === true) {
+lobbiesButton.addEventListener('click', async () => {
+    const profile = await getMyProfile();
+    if (profile.start_clicked === true) {
         await client
             .from('profiles')
             .update({ start_clicked: false })
             .match({ user_id: profile.user_id });
     }
+    window.location.href = '../lobby-page';
+});
+
+window.addEventListener('load', async () => {
+    const user = getUser();
+    // const profile = getMyProfile();
+    await unReady(user);
+    renderPlayerCards();
+    // if (profile.host === true && profile.start_clicked === true) {
+    //     await client
+    //         .from('profiles')
+    //         .update({ start_clicked: false })
+    //         .match({ user_id: profile.user_id });
+    // }
+    console.log('gameover');
 });
 
 async function renderPlayerCards() {
