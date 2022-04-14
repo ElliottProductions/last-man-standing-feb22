@@ -14,6 +14,7 @@ logoutButton.addEventListener('click', () => {
 let moveSpeed = 10;
 let infected_count = 0;
 let currentPlayer;
+let infectToggle = false;
 
 window.addEventListener('load', async () => {
     currentPlayer = await getMyProfile();
@@ -52,7 +53,10 @@ async function fetchAndDisplayActivePlayers() {
         }
         playerEl.classList.add('player');
         playerEl.style.transform = `translate(${player.x_position}px, ${player.y_position}px)`;
-
+        //if ()
+        if (player.infected === true){
+            playerEl.classList.add('infected');
+        }
         gameArea.append(playerEl);
     }
 
