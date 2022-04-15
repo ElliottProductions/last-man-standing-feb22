@@ -4,6 +4,9 @@ const playerCard = document.querySelector('.player-cards');
 
 checkAuth();
 
+//resets the start clicked bool on the host to prevent 
+//players pulling instantly into a new game on returning to lobby
+//redirects user to lobby page on click
 lobbiesButton.addEventListener('click', async () => {
     const profile = await getMyProfile();
     if (profile.start_clicked === true) {
@@ -15,20 +18,15 @@ lobbiesButton.addEventListener('click', async () => {
     window.location.href = '../lobby-page';
 });
 
+//on load of gameover page renders player cards with game stats
+//and unreadies all users 
 window.addEventListener('load', async () => {
     const user = getUser();
-    // const profile = getMyProfile();
     await unReady(user);
     renderPlayerCards();
-    // if (profile.host === true && profile.start_clicked === true) {
-    //     await client
-    //         .from('profiles')
-    //         .update({ start_clicked: false })
-    //         .match({ user_id: profile.user_id });
-    // }
-    console.log('gameover');
 });
 
+//loops through and renders out a player card with the player's name and number of points earned
 async function renderPlayerCards() {
 
     const players = await getActivePlayers();
@@ -39,7 +37,7 @@ async function renderPlayerCards() {
         const infected = document.createElement('p');
         div.classList.add('game-over-card');
 
-        infected.textContent = 'Players infected: ' + player.num_infected;
+        infected.textContent = 'Player score: ' + player.num_infected;
         name.textContent = player.user_name;
         div.append(name, infected);
         playerCard.append(div);

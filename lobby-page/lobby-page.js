@@ -11,7 +11,11 @@ const tengu = document.querySelector('.tengu');
 const egg = document.querySelector('.EGG');
 const startButton = document.getElementById('start-game');
 
-
+//This event listener calls fetch util that reads num 
+//of infected players and determines if one needs to be randomly assigned
+//and checks to see if anybody has been assigned the host 
+//and if not assigns the first logged in user a host property in supabase
+//and also disables the button on click
 startButton.addEventListener('click', async ()=>{
     const infectedArr = await getInfectedPlayers();
     if (infectedArr.length === 0){
@@ -32,33 +36,42 @@ startButton.addEventListener('click', async ()=>{
     startButton.disabled = true;
 });
 
+//deactivates all users on logout to prevent absent users 
+//from being assigned game properties
 logoutButton.addEventListener('click', async () => {
     const user = getUser();
     await deactivateUser(user);
     logout();
 });
 
+//calls fetch utils to assign a """"""player model""""""" to them
 hap.addEventListener('click', async () => {
     const user = await getMyProfile();
     await selectFighter(user, '2');
 });
 
+//calls fetch utils to assign a """"""player model""""""" to them
 tengu.addEventListener('click', async () => {
     const user = await getMyProfile();
     await selectFighter(user, '3');
 });
 
+//calls fetch utils to assign a """"""player model""""""" to them
 egg.addEventListener('click', async () => {
     const user = await getMyProfile();
     await selectFighter(user, '1');
 });
 
+//calls fetch utils to assign a """"""player model""""""" to them
 smiley.addEventListener('click', async () => {
     const user = await getMyProfile();
     await selectFighter(user, '4');
 });
 
-
+//on load of game page assigns a random position to every player
+//clears the DOM
+//activates and displays all active players
+//uninfects players when returning from the gameover page
 window.addEventListener('load', async () => {
     let randomY = Math.ceil(Math.random() * 490);
     let randomX = Math.ceil(Math.random() * 700);
@@ -80,6 +93,7 @@ window.addEventListener('load', async () => {
         .subscribe();
 });
 
+//toggles ready state for the user clicking it
 readyBtn.addEventListener('click', async () => {
     userListEl.innerHTML = '';
     const user = getUser();
@@ -94,6 +108,8 @@ readyBtn.addEventListener('click', async () => {
     }
 });
 
+//displays all players and shows their usernames and player icons  
+//and determines if a game is ready to begin
 async function displayActivePlayers() {
     userListEl.innerHTML = '';
     let allReady = true;
