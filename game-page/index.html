@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/home.css">
-    <title>Document</title>
+    <title>LastManStanding</title>
 </head>
 
 <body>
@@ -20,13 +20,16 @@
         </div>
     </header>    
     <button id="logout">Logout</button>
-    <main>
-        <h1>You are logged in!</h1>
-    </main>
+    <section class="main-section" name="main-section">
+        <div class="game-div" name="game-div">
+        Here lies the game
+        </div>
+    </section>
     <footer>
-        <div class="copy gutter-right">&copy; 2021 Alchemy Code Lab</div>
+        <button id="infect-visible" type="toggle">Infected Visible</button>
+        <div class="copy gutter-right">&copy; 2022 Last Team Standing</div>
     </footer>
-    <script type="module" src="./other-page.js"></script>
+    <script type="module" src="./game-page.js"></script>
 </body>
 
 </html>

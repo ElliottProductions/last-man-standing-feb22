@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/home.css">
+    <title>Lobby</title>
+</head>
+
+<body>  
+    <button id="logout">Logout</button>
+    <h1>Lobby</h1>
+    <main class="main-lobby">
+        
+        <section class="lobby-left">
+            <div class="fighter-selection">
+                <h3>Select a fighter</h3>
+                <button class="smiley">😃</button>
+                <button class="hap">🤠</button>
+                <button class="tengu">👺</button>
+                <button class="EGG">🥚</button>
+            </div>
+        </section>
+        <section class="lobby-center">
+            <h3>All players must ready up, when all players are ready host can press start game to begin a match</h3>
+            
+            <button class="ready-up">ready up!</button>
+            <button id="start-game">START GAME</button>
+            <div class="user-list">
+            </div>
+        </section>
+        <section class="lobby-right">
+            <br>
+            <form id="player-chat" class="player-chatbox">
+                <input type="text" name="chat-box"> <button>Bend Bessage</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <div class="copy gutter-right">&copy; 2022 Last Team Standing</div>
+    </footer>
+    <script type="module" src="./lobby-page.js"></script>
+</body>
+
+</html>

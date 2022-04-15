@@ -10,16 +10,19 @@
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/home.css">
-    <title>Document</title>
+    <title>LMS Sign-in</title>
 </head>
 
-<body>
+<body class="bodytwo">
     <header>
         <div class="gutter-right logo">
-            <img src="assets/big-logo.png" />
+            <h2 class="title">LAST MAN STANDING</h2>
         </div>
     </header>
+    
+    <div class="main2">
     <main class="auth-main">
+        
         <div class="left">
             <div class="auth-container">
                 <form id="sign-in">
@@ -36,13 +39,21 @@
                     <h3>Sign Up</h3>
                     <label>Email </label><input type='email' name='email' id="sign-up-email" />
                     <label>Password </label><input type='password' name='password' id="sign-up-password" />
+                    <label>User Name</label><input required name='username' id='username'/>
                     <button>Submit</button>
                 </form>
             </div>
         </div>
+        
     </main>
+    <div class="far-right">
+        <div>
+            <h3 id="built-by"> Created by Elliot Cheifetz, Khayman King, Ian Cheifetz, Thomas Harding</h3>
+        </div>
+    </div>
+    </div>
     <footer>
-        <div class="copy gutter-right">&copy; 2021 Alchemy Code Lab</div>
+        <div class="copy gutter-right">&copy; 2022 Last Team Standing</div>
     </footer>
     <script type="module" src="./app.js"></script>
 </body>
