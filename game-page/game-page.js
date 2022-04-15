@@ -14,8 +14,9 @@ logoutButton.addEventListener('click', () => {
 let moveSpeed = 10;
 let infected_count = 0;
 let currentPlayer;
-//let infectToggle = false;
 
+//displays all active players and their random positions assigned by the function in lobby load
+//alerts the player assigned to be the first infected that they are infected
 window.addEventListener('load', async () => {
     currentPlayer = await getMyProfile();
     await fetchAndDisplayActivePlayers();
@@ -32,8 +33,10 @@ window.addEventListener('load', async () => {
     
 });
 
+//displays active players with their selected icons and usernames and moves 
+//their position on the screen according to their X Y coordinates
+//determines if the amount of players infected has reached the threshold to end the game
 async function fetchAndDisplayActivePlayers() {
-    //TODO should only update players that change? reduce lag?
     const activePlayers = await getActivePlayers();
 
     gameArea.textContent = '';
@@ -53,7 +56,6 @@ async function fetchAndDisplayActivePlayers() {
         }
         playerEl.classList.add('player');
         playerEl.style.transform = `translate(${player.x_position}px, ${player.y_position}px)`;
-        //if ()
         if (player.infected === true){
             playerEl.classList.add('infected');
         }
@@ -71,6 +73,8 @@ async function fetchAndDisplayActivePlayers() {
 const GAME_HEIGHT = 490;
 const GAME_WIDTH = 700;
 
+//enables inputs to move characters around and calls function to 
+//determine if a collision has occurred
 window.addEventListener('keydown', async (e) => {
     currentPlayer = await getMyProfile();
     if (e.key === 'w') {
@@ -106,6 +110,8 @@ window.addEventListener('keydown', async (e) => {
     await getCollision();
 });
 
+//references current player's position against other players to determine
+//if their X Y position has collided
 async function getCollision(){
 
     const activePlayerArr = await getActivePlayers();
