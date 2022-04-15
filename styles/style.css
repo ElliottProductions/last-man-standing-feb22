@@ -105,11 +105,12 @@ h2 {
 }
 
 .far-right {
-    width: 550px;
+    width: 545px;
     margin: 50px;
     height: 500px;
     background-image: url('../assets/lastmangraphic.PNG');
     position: relative;
+    background-size: contain;
 }
 .main-logo {
     animation: pulse 5s infinite ease-in-out;
@@ -231,6 +232,20 @@ div.game-div {
     align-items: center;
     padding-top: 20px;
 }
+
+.game-over-card-win {
+    color:rgb(49, 50, 51);
+    border-color: rgb(127, 133, 138);
+    font-size: 40px;
+    height:245px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+
 
 
 
