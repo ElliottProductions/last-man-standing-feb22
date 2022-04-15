@@ -152,7 +152,6 @@ export async function endGameState(infected_count, user) {
         .update({ num_infected: infected_count })
         .match({ user_id: user.id });
     window.location.replace('../gameover');
-    alert('gameover');
 }
 
 export async function readyUp(user) {
@@ -171,7 +170,6 @@ export async function unReady(user) {
 
 export async function startGame(){
     window.location.replace('../game-page');
-    alert('start game function is now running');
 }
 
 export async function uninfect(player) {

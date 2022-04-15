@@ -36,9 +36,30 @@ async function renderPlayerCards() {
         const name = document.createElement('h4');
         const infected = document.createElement('p');
         div.classList.add('game-over-card');
+        
 
         infected.textContent = 'Player score: ' + player.num_infected;
+        
         name.textContent = player.user_name;
+
+        if (player.infected === false) {
+            div.classList.remove('game-over-card');
+            div.classList.add('game-over-card-win');
+            infected.textContent = '';
+            if (player.fight_icon === 4){
+                name.textContent = `😃  ${player.user_name} Survived`;
+            }
+            if (player.fight_icon === 2){
+                name.textContent = `🤠  ${player.user_name} Survived`;
+            }
+            if (player.fight_icon === 3){
+                name.textContent = `👺 ${player.user_name} Survived`;
+            }
+            if (player.fight_icon === 1){
+                name.textContent = `🥚    ${player.user_name} Survived`;
+            }
+        }
+
         div.append(name, infected);
         playerCard.append(div);
     }
