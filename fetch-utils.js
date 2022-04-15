@@ -113,7 +113,7 @@ export async function activateUser(user){
     const host = await client
         .from('profiles')
         .select('*')
-        .match({ host: true });
+        .match({ host: true, active: true });
     if (host.body.length === 0){
         await client 
             .from('profiles')
