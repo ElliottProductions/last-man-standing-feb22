@@ -1,4 +1,5 @@
 import { getInfectedPlayers, getReadyPlayers, infect, selectFighter, uninfect, updatePlayer, activateUser, deactivateUser, client, checkAuth, getActivePlayers, getUser, logout, readyUp, unReady, startGame, getMyProfile } from '../fetch-utils.js';
+import { getEmoji } from '../utils.js';
 
 checkAuth();
 
@@ -25,7 +26,7 @@ startButton.addEventListener('click', async ()=>{
         await infect(chosen);
     }
     const profile = await getMyProfile();
-    if (profile.host === true) {
+    if (profile.host) {
         await client
             .from('profiles')
             .update({ start_clicked: true })
@@ -44,29 +45,12 @@ logoutButton.addEventListener('click', async () => {
     logout();
 });
 
-//calls fetch utils to assign a """"""player model""""""" to them
-hap.addEventListener('click', async () => {
-    const user = await getMyProfile();
-    await selectFighter(user, '2');
-});
-
-//calls fetch utils to assign a """"""player model""""""" to them
-tengu.addEventListener('click', async () => {
-    const user = await getMyProfile();
-    await selectFighter(user, '3');
-});
-
-//calls fetch utils to assign a """"""player model""""""" to them
-egg.addEventListener('click', async () => {
-    const user = await getMyProfile();
-    await selectFighter(user, '1');
-});
-
-//calls fetch utils to assign a """"""player model""""""" to them
-smiley.addEventListener('click', async () => {
-    const user = await getMyProfile();
-    await selectFighter(user, '4');
-});
+[hap, tengu, egg, smiley]
+// here is a way to loop that also gives you an index, which we can use to call select fighter with the correct number
+    .forEach(async (playerEl, i) => {
+        const user = await getMyProfile();
+        await selectFighter(user, i + 1);
+    });
 
 //on load of game page assigns a random position to every player
 //clears the DOM
@@ -86,9 +70,8 @@ window.addEventListener('load', async () => {
     
     await client
         .from('profiles')
-        .on('UPDATE', async (payload) => {
+        .on('UPDATE', async () => {
             await displayActivePlayers();
-            payload;
         })
         .subscribe();
 });
@@ -100,7 +83,7 @@ readyBtn.addEventListener('click', async () => {
     const profile = await getMyProfile();
 
 
-    if (profile.is_ready === false) {
+    if (!profile.is_ready) {
         await readyUp(user);
 
     } else {
@@ -115,32 +98,22 @@ async function displayActivePlayers() {
     let allReady = true;
     const userArr = await getActivePlayers();
     for (let player of userArr) {
-        if (player.is_ready === false) {
+        if (!player.is_ready) {
             allReady = false;
         }
     }
 
     for (let user of userArr) {
-        if (user.host === true && user.start_clicked === true && allReady === true) {
+        if (user.host && user.start_clicked && allReady) {
             await startGame();
         } 
         if (user.active) {
             const userDiv = document.createElement('div');
             const userName = document.createElement('p');
             const userReady = document.createElement('p');
-            if (user.fight_icon === 4){
-                userName.textContent = user.user_name + '😃';
-            }
-            if (user.fight_icon === 2){
-                userName.textContent = user.user_name + '🤠';
-            }
-            if (user.fight_icon === 3){
-                userName.textContent = user.user_name + '👺';
-            }
-            if (user.fight_icon === 1){
-                userName.textContent = user.user_name + '🥚';
-            }
-            if (user.host === true) {
+            userName.textContent = user.user_name + getEmoji(user);
+
+            if (user.host) {
                 userName.textContent += '👑' + '(host)';
             }
             if (user.is_ready) {

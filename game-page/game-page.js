@@ -1,5 +1,5 @@
 import { checkAuth, logout, getMyProfile, updatePlayer, getActivePlayers, client, infect, getInfectedPlayers, endGameState, getUser } from '../fetch-utils.js';
-
+import { getEmoji } from '../utils.js';
 
 checkAuth();
 
@@ -27,7 +27,7 @@ window.addEventListener('load', async () => {
             payload; //this is the guy who actually gets updated
         })
         .subscribe();
-    if (currentPlayer.infected === true){
+    if (currentPlayer.infected){
         alert('You are patient zero');
     }
     
@@ -42,21 +42,12 @@ async function fetchAndDisplayActivePlayers() {
     gameArea.textContent = '';
     for (let player of activePlayers) {
         const playerEl = document.createElement('div');
-        if (player.fight_icon === 4){
-            playerEl.textContent = `😃  ${player.user_name}`;
-        }
-        if (player.fight_icon === 2){
-            playerEl.textContent = `🤠  ${player.user_name}`;
-        }
-        if (player.fight_icon === 3){
-            playerEl.textContent = `👺 ${player.user_name}`;
-        }
-        if (player.fight_icon === 1){
-            playerEl.textContent = `🥚 ${player.user_name}`;
-        }
+        const emoji = getEmoji(player);
+        
+        playerEl.textContent = `${emoji} ${player.user_name}`;
         playerEl.classList.add('player');
         playerEl.style.transform = `translate(${player.x_position}px, ${player.y_position}px)`;
-        if (player.infected === true){
+        if (player.infected){
             playerEl.classList.add('infected');
         }
         gameArea.append(playerEl);
@@ -117,21 +108,22 @@ async function getCollision(){
     const activePlayerArr = await getActivePlayers();
         
     for (let player of activePlayerArr) {
-                //check and see if any of the active players are colliding with "id"
-        if ( 
-            ((currentPlayer.y_position + 10) < (player.y_position)) ||
-                    (currentPlayer.y_position > (player.y_position + 10)) ||
-                    ((currentPlayer.x_position + 10) < player.x_position) ||
-                    (currentPlayer.x_position > (player.x_position + 10))
-                    
-        ){
-                    //
-        } else if (currentPlayer.user_id !== player.user_id) {
-            if ((currentPlayer.infected === true) && (player.infected !== true)) {
-                infected_count++;
-                await infect(player);
-            }
-                    //nothing
+        //check and see if any of the active players are colliding with "id"
+        const condition1 = (currentPlayer.y_position + 10) < player.y_position;
+        const condition2 = currentPlayer.y_position > (player.y_position + 10);
+        const condition3 = (currentPlayer.x_position + 10) < player.x_position;
+        const condition4 = currentPlayer.x_position > (player.x_position + 10);
+        const condition5 = currentPlayer.user_id !== player.user_id;
+        const condition6 = currentPlayer.infected;
+        const condition7 = !player.infected;
+
+        // I'm eyeballing this, so I might be off here, but I think this would work and be a bit easier to read and maintain. 
+        // It would be nice to give these conditions readable names in case somebody needs to debug particular scenarios later
+        const allAreTrue = condition1 || condition2 || condition3 || condition4 || condition5 || condition6 || condition7;
+
+        if (!allAreTrue) {
+            infected_count++;
+            await infect(player);
         }
 
     }
