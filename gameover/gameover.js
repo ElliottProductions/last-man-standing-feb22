@@ -1,4 +1,5 @@
 import { checkAuth, client, getActivePlayers, getMyProfile, getUser, unReady } from '../fetch-utils.js';
+import { getEmoji } from '../utils.js';
 const lobbiesButton = document.getElementById('to-lobbies');
 const playerCard = document.querySelector('.player-cards');
 
@@ -9,7 +10,7 @@ checkAuth();
 //redirects user to lobby page on click
 lobbiesButton.addEventListener('click', async () => {
     const profile = await getMyProfile();
-    if (profile.start_clicked === true) {
+    if (profile.start_clicked) {
         await client
             .from('profiles')
             .update({ start_clicked: false })
@@ -42,22 +43,14 @@ async function renderPlayerCards() {
         
         name.textContent = player.user_name;
 
-        if (player.infected === false) {
+        if (!player.infected) {
             div.classList.remove('game-over-card');
             div.classList.add('game-over-card-win');
             infected.textContent = '';
-            if (player.fight_icon === 4){
-                name.textContent = `😃  ${player.user_name} Survived`;
-            }
-            if (player.fight_icon === 2){
-                name.textContent = `🤠  ${player.user_name} Survived`;
-            }
-            if (player.fight_icon === 3){
-                name.textContent = `👺 ${player.user_name} Survived`;
-            }
-            if (player.fight_icon === 1){
-                name.textContent = `🥚    ${player.user_name} Survived`;
-            }
+
+            const emoji = getEmoji(player);
+            
+            name.textContent = `${emoji} ${player.user_name} Survived`;
         }
 
         div.append(name, infected);
